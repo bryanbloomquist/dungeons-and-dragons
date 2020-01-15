@@ -1,11 +1,3 @@
-.btn {
-    margin-left: 5px;
-}
-
-.transparent{
-    background:rgba(255,255,255,0.7);
-}
-
 body {
     font-family: 'Germania One', cursive;
     background-image: url("../images/dungeons-dragons-dice-roller-6275.jpg");
@@ -14,68 +6,97 @@ body {
     background-attachment: fixed;
 }
 
-
-
-.header, .footer {
-    width: 100%;
-    display: inline-block;
-    text-align: center;
-    
-}
-
-#engraved {
-    text-shadow: -3px -2px 5px rgba(252, 210, 81, 0.9);
-}
-
 .header {
-    padding:50px;
+    padding:30px;
+    text-align: center;
     background-image:url("../images/corrodedMetalPic.jpg");
     background-repeat: no-repeat;
     background-size:cover;
     box-shadow: inset 0 0 30px #000000;
 }
 
-.footer {
-    font-size:10px;
-    padding:20px;
-    background-color:rgb(82, 99, 48);
-    color: rgba(0,0,0,0.6);
-    text-shadow: 2px 2px 2px rgba(235, 240, 234, 0.5);
-    box-shadow: inset 0 0 15px #000000;
+#user-form {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
 }
 
-#combat-table {
-    color:#ffff;
-    font-size:20px;
+.engraved {
+    text-shadow: -3px -2px 5px rgba(252, 210, 81, 0.9);
+}
+
+.full-size {
+    min-height: 77vh;
+}
+
+.sidebar {
+    background:#222222b2;
+}
+
+#not-on-file {
+    background: #ddd;
+    color: #222;
 }
 
 #dice-tray {
     height: 100px;
+    color: #00f;
 }
 
-/* unvisited link */
-a:link {
-    color:#333;
+#monster-info-body {
+    font-size: 12px;
 }
 
-/* visited link */
-a:visited {
-    color:#333;
+#combat-table {
+    color:#fff;
+    font-size:20px;
 }
 
-/* mouse over link */
-a:hover {
-    color:#000;
+.transparent{
+    background:rgba(255,255,255,0.7);
 }
 
-/* selected link */
-a:active {
-    color:#333;
+.tblbtn {
+    margin-left: 5px;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color:rgb(82, 99, 48);
+    color: rgba(0,0,0,0.6);
+    box-shadow: inset 0 0 15px #000000;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    margin: 0;
+}
+
+pre {
+    outline: 1px solid #ccc;
+    padding: 5px; 
+    margin: 5px; 
+}
+
+.string { 
+    color: #00f; 
+}
+
+.number { 
+    color:  #f00; 
+}
+
+.boolean { 
+    color: #0f0; 
+}
+
+.null {
+    color: #000; 
+}
+
+.key { 
+    color: #f0f; 
 }
