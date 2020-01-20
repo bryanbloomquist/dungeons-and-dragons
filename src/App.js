@@ -1,11 +1,17 @@
 import React from 'react';
-import './App.css';
+import { Provider } from "./AppContext";
+import './App.scss';
+import Header from "./Components/Header/Header";
+import MainBody from "./Components/MainBody/MainBody";
 
 function App() {
   return (
-    <div className = "App">
-      <h1>Hello World!!!</h1>
-    </div>
+    <Provider>
+      <Header />
+      <MainBody>
+        
+      </MainBody>
+    </Provider>
   );
 }
 
