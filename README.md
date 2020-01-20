@@ -1,7 +1,7 @@
 # dungeons-and-dragons
 
 
-A continuation of group project #1 from my full stack web development boot camp [(original repo)](https://github.com/bryanbloomquist/group-project-1), a Dungeons and Dragons initiative tracker app.
+A continuation of my first group project from full stack web development boot camp [(original repo)](https://github.com/bryanbloomquist/group-project-1), a Dungeons and Dragons combat tracker app for Dungeon Master's who keep losing their pencils.
 
 
 ## Let's Play!
