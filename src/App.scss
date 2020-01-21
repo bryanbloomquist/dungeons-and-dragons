@@ -1,5 +1,6 @@
-$blacker: #000000;
 $black: #222222;
+$blacker: #000000;
+$white: #ffffff;
 $yellow: #fcd251;
 
 body {
@@ -17,8 +18,14 @@ body {
 	background-repeat: no-repeat;
 	background-size:cover;
 	box-shadow: inset 0 0 30px $blacker;
+	margin: 0;
 }
 
 .jumbotron h1 {
 	text-shadow: -3px -2px 5px opacify($yellow, 0.8);
+}
+
+.accordion .card {
+	background-color: #222222aa;
+	color: $white;
 }

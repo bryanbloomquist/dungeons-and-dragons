@@ -7,7 +7,7 @@ const MainBody = () => {
 	return (
 		<Container fluid>
 			<Row>
-				<Col md={3}>
+				<Col md={3} className="p-0">
 					<AccordionMenu />
 				</Col>
 				<Col md={9}>
