@@ -5,31 +5,35 @@ const AccordionMenu = () => {
 	return (
 		<Accordion>
 			<Card>
-				<Card.Header>
-					<Accordion.Toggle as={Card.Header} eventKey="0">Roll Dice</Accordion.Toggle>
-				</Card.Header>
-				<Card.Body>
-					"Dice Roller Will Go Here Later!"
-				</Card.Body>
+				<Accordion.Toggle as={Card.Header} eventKey="0">
+					Roll Dice
+				</Accordion.Toggle>
+				<Accordion.Collapse eventKey="0">
+					<Card.Body>
+						"Dice Roller Will Go Here Later!"
+					</Card.Body>
+				</Accordion.Collapse>
 			</Card>
 			<Card>
-				<Card.Header>
-					<Accordion.Toggle as={Card.Header} eventKey="1">Add NPC</Accordion.Toggle>
-				</Card.Header>
-				<Card.Body>
-					"Add NPC Will Go Here Later!"
-				</Card.Body>
+				<Accordion.Toggle as={Card.Header} eventKey="1">
+					Add NPC
+				</Accordion.Toggle>
+				<Accordion.Collapse eventKey="1">
+					<Card.Body>
+						"Add NPC Will Go Here Later!"
+					</Card.Body>
+				</Accordion.Collapse>
 			</Card>
 			<Card>
-				<Card.Header>
-					<Accordion.Toggle as={Card.Header} eventKey="2">Add PC</Accordion.Toggle>
-				</Card.Header>
-				<Card.Body>
-					"Add PC Will Go Here Later!"
-				</Card.Body>
+				<Accordion.Toggle as={Card.Header} eventKey="2">
+					Add PC
+				</Accordion.Toggle>
+				<Accordion.Collapse eventKey="2">
+					<Card.Body>
+						"Add PC Will Go Here Later!"
+					</Card.Body>
+				</Accordion.Collapse>
 			</Card>
-
-
 		</Accordion>
 	);
 };
