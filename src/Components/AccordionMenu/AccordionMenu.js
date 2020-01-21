@@ -19,19 +19,19 @@ const AccordionMenu = () => {
 				</Accordion.Toggle>
 				<Accordion.Collapse eventKey="0">
 					<Card.Body className="p-0">
-						<h1 className="text-center">Roll Dice</h1>
+						<h1>Roll Dice</h1>
 						<DiceRoller />
 					</Card.Body>
 				</Accordion.Collapse>
 				<Accordion.Collapse eventKey="1">
 					<Card.Body className="p-0">
-						<h1 className="text-center">Add NPC</h1>
+						<h1>Add NPC</h1>
 						<AddNPC />
 					</Card.Body>
 				</Accordion.Collapse>
 				<Accordion.Collapse eventKey="2">
 					<Card.Body className="p-0">
-						<h1 className="text-center">Add PC</h1>
+						<h1>Add PC</h1>
 						<AddPC />
 					</Card.Body>
 				</Accordion.Collapse>
