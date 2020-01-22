@@ -28,8 +28,15 @@ body {
 .accordion .card {
 	background-color: #222222aa;
 	color: $white;
+	padding: 15px;
 }
 
 .dice-tray {
 	height: 100px;
+}
+
+#combat-table {
+	font-size: 20px;
+	color: $white;
+	background: #222222aa;
 }

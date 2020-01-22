@@ -1,7 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import AccordionMenu from "../AccordionMenu/AccordionMenu";
-import TableTracker from "../TableTracker/TableTracker";
+import AccordionMenu from "./AccordionMenu/AccordionMenu";
+import CombatTable from "./CombatTable/CombatTable";
+
 
 const MainBody = () => {
 	return (
@@ -10,8 +11,8 @@ const MainBody = () => {
 				<Col md={3} className="p-0 text-center">
 					<AccordionMenu />
 				</Col>
-				<Col md={9}>
-					<TableTracker />
+				<Col md={9} className="p-0">
+					<CombatTable />
 				</Col>
 			</Row>
 		</Container>

@@ -10,18 +10,18 @@ const AccordionMenu = () => {
 		<Accordion>
 			<Card>
 				<Row>
-					<Col sm={4} className="px-1">
-						<Accordion.Toggle as={Button} variant="warning" className="mb-2" eventKey="0" block>
+					<Col sm={4} className="p-1">
+						<Accordion.Toggle as={Button} variant="warning" className="my-2" eventKey="0" block>
 							Dice
 						</Accordion.Toggle>
 					</Col>
-					<Col sm={4} className="px-1">
-						<Accordion.Toggle as={Button} variant="warning" className="mb-2" eventKey="1" block>
+					<Col sm={4} className="p-1">
+						<Accordion.Toggle as={Button} variant="warning" className="my-2" eventKey="1" block>
 							NPC
 						</Accordion.Toggle>
 					</Col>
-					<Col sm={4} className="px-1">
-						<Accordion.Toggle as={Button} variant="warning" className="mb-2" eventKey="2" block>
+					<Col sm={4} className="p-1">
+						<Accordion.Toggle as={Button} variant="warning" className="my-2" eventKey="2" block>
 							PC
 						</Accordion.Toggle>
 					</Col>
