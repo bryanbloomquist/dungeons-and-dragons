@@ -16,11 +16,11 @@ const AddPC = () => {
 				<Form.Label>Armor Class</Form.Label>
 				<Form.Control type="number" placeholder="Enter armor class..." />
 			</Form.Group>
-			<Form.Group className="m-2 text-left" controlId="formAddPlayerArmorClass">
+			<Form.Group className="m-2 text-left" controlId="formAddPlayerMaxHealth">
 				<Form.Label>Max Health</Form.Label>
 				<Form.Control type="number" placeholder="Enter maximum HP..." />
 			</Form.Group>
-			<Form.Group className="m-2 text-left" controlId="formAddPlayerArmorClass">
+			<Form.Group className="m-2 text-left" controlId="formAddPlayerCurrentHealth">
 				<Form.Label>Current Health</Form.Label>
 				<Form.Control type="number" placeholder="Enter current HP..." />
 			</Form.Group>
