@@ -1,22 +1,44 @@
-import React from "react";
-import {Form, Button} from "react-bootstrap";
+import React, { useContext } from "react";
+import { Form, Button } from "react-bootstrap";
+import { Context } from "../../../AppContext";
 
 const AddNPC = () => {
-	return (
-		<Form>
-			<Form.Group className="m-2 text-left" controlId="formAddMonsterName">
-				<Form.Label>Monster Name</Form.Label>
-				<Form.Control type="text" placeholder="Enter monster name..." />
-			</Form.Group>
-			<Form.Group className="m-2 text-left" controlId="formAddMonsterQuantity">
-				<Form.Label>Number of Monsters</Form.Label>
-				<Form.Control type="number" placeholder="1" value="1" />
-			</Form.Group>
-			<Button variant="warning" className="m-2" type="submit">
-				Submit
-			</Button>
-		</Form>
-	);
+  const {
+    monsterName,
+    monsterQuantity,
+    handleMonsterNameChange,
+    handleMonsterQuantityChange,
+    submitMonster
+  } = useContext(Context);
+
+  return (
+    <Form>
+      <Form.Group className="m-2 text-left" controlId="formAddMonsterName">
+        <Form.Label>Monster Name</Form.Label>
+        <Form.Control
+          type="text"
+          defaultValue={monsterName}
+          onChange={handleMonsterNameChange}
+        />
+      </Form.Group>
+      <Form.Group className="m-2 text-left" controlId="formAddMonsterQuantity">
+        <Form.Label>Number of Monsters</Form.Label>
+        <Form.Control
+          type="number"
+          defaultValue={monsterQuantity}
+          onChange={handleMonsterQuantityChange}
+        />
+      </Form.Group>
+      <Button
+        variant="warning"
+        className="m-2"
+        type="submit"
+        onClick={submitMonster}
+      >
+        Submit
+      </Button>
+    </Form>
+  );
 };
 
 export default AddNPC;

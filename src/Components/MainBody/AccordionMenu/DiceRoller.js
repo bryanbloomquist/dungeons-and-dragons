@@ -7,38 +7,15 @@ import { Context } from "../../../AppContext";
 
 const DiceRoller = () => {
   const {
+    diceModifier,
+    diceResults,
+    numberOfDice,
+    numberOfSides,
     handleDiceInputChange,
     handleModInputChange,
     handleSideInputChange,
-    numberOfDice,
-    numberOfSides,
-    diceModifier,
-    rollDice,
-    diceResults
+    rollDice
   } = useContext(Context);
-  // const [numberOfDice, setNumberOfDice] = useState(4);
-  // const [numberOfSides, setNumberOfSides] = useState(6);
-  // const [diceModifier, setDiceModifier] = useState(0);
-  // const [diceResults, setDiceResults] = useState("");
-
-  // const handleDiceInputChange = event => setNumberOfDice(event.target.value);
-  // const handleSideInputChange = event => setNumberOfSides(event.target.value);
-  // const handleModInputChange = event => setDiceModifier(event.target.value);
-
-  // const rollDice = e => {
-  //   e.preventDefault();
-  //   let tempArray = [];
-  //   let tempTotal = 0;
-  //   for (let i = 0; i < numberOfDice; i++) {
-  //     let x = Math.floor(Math.random() * numberOfSides) + 1;
-  //     tempArray.push(x);
-  //     tempTotal += x;
-  //   }
-  //   let diceString = tempArray.join(" + ");
-  //   let total = parseInt(tempTotal) + parseInt(diceModifier);
-  //   console.log(typeof tempTotal, typeof diceModifier);
-  //   setDiceResults(`( ${diceString} ) + ${diceModifier} = ${total}`);
-  // };
 
   return (
     <Form>
