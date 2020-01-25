@@ -15,21 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 // Set global variables
 const database = firebase.database();
-let name;
-let maxHP;
-let currentHP;
-let armorClass;
-let initiativeNumber;
-let monsterInitiative;
-let userMonsterHP;
-let userMonsterAC;
-let userMonsterName;
-let dexBonus;
-let HPId;
 let base;
-let removeId;
-let monsterArray;
-let displayArray;
 
 $(document).ready(function(){
 
@@ -59,7 +45,7 @@ $(document).ready(function(){
 	// Remove combatant from firebase
 	database.ref().child("Characters").on("child_removed", function (snapshot) {
 		event.preventDefault();
-		removeId = snapshot.key;
+		const removeId = snapshot.key;
 		const removeVar = "#" + removeId + "-remove";
 		$(removeVar).remove();
 	}, function (errorObject) {
@@ -68,7 +54,7 @@ $(document).ready(function(){
 
 
 	// Sorts table so highest inititiatve is on top
-	function orderCombat() {
+	const orderCombat = () => {
 		let table, rows, switching, i, x, y, shouldSwitch;
 		table = document.getElementById("combat-table");
 		switching = true;
@@ -100,13 +86,13 @@ $(document).ready(function(){
 	};
 
 	// Write JSON into readible format
-	function output(inp) {
+	const output = inp => {
 		$("#monster-info-body").empty();
 		document.getElementById("monster-info-body").appendChild(document.createElement('pre')).innerHTML = inp;
 	};
 
 	// Colorize the formatted JSON object because it looks nicer
-	function syntaxHighlight (json) {
+	const syntaxHighlight = json => {
 		json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 		return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
 			var cls = 'number';
@@ -134,7 +120,7 @@ $(document).ready(function(){
 			url: queryURL,   
 			method: "GET",
 		}).then(function(response){
-			monsterArray = [];
+			let monsterArray = [];
 			monsterArray.push(response);
 			const obj = monsterArray[0];
 			const str = JSON.stringify(obj, undefined, 2)
@@ -146,7 +132,7 @@ $(document).ready(function(){
 
 	// Heal Button
 	$(document).on("click", ".heal", function () {
-		HPId = $(this).attr('id');
+		const HPId = $(this).attr('id');
 		base = HPId;
 		currentHP = $("#" + HPId + '-HP').attr('value');
 		currentHP = parseInt(currentHP) + parseInt($("#" + HPId + "-HPInput").val());
@@ -158,7 +144,7 @@ $(document).ready(function(){
 
 	// Damage Button
 	$(document).on("click", ".damage", function () {
-		HPId = $(this).attr('id');
+		const HPId = $(this).attr('id');
 		base = HPId;
 		currentHP = $("#" + HPId + '-HP').attr('value');
 		currentHP = parseInt(currentHP) - parseInt($("#" + HPId + "-HPInput").val());
@@ -179,7 +165,7 @@ $(document).ready(function(){
 	// Remove combatant from firebase
 	database.ref().on("child_removed", function (snapshot) {
 		event.preventDefault();
-		removeId = snapshot.key;
+		const removeId = snapshot.key;
 		var removeVar = "#" + removeId + "-remove";
 		$(removeVar).remove();
 	}, function (errorObject) {
@@ -187,19 +173,19 @@ $(document).ready(function(){
 	});
 
 	// Remove combatant from table
-	$(document).on("click", ".remove", function () {
-		removeId = $(this).attr('id')
+	$(document).on("click", ".remove", function() {
+		const removeId = $(this).attr('id')
 		database.ref().child("Characters").child(removeId).remove();
 	});
 
 	// When Add Character button is clicked
 	$("#new-character").on("click", function(event){
 		event.preventDefault();
-		name = $("#input-name").val().trim();
-		maxHP = $("#input-max-hp").val().trim();
-		currentHP = $("#input-current-hp").val().trim();
-		armorClass = $("#input-ac").val().trim();
-		initiativeNumber = $("#input-initiative").val().trim();
+		const name = $("#input-name").val().trim();
+		const maxHP = $("#input-max-hp").val().trim();
+		const currentHP = $("#input-current-hp").val().trim();
+		const armorClass = $("#input-ac").val().trim();
+		const initiativeNumber = $("#input-initiative").val().trim();
 		database.ref().child("Characters").push({
 			name: name,
 			maxHP: maxHP,
@@ -243,12 +229,12 @@ $(document).ready(function(){
 					method: "GET"
 				}).then(function(response){
 					const userMonsterButton = "<button type='button' class='btn btn-sm btn-secondary info tblbtn' id='id"+response.index+"' data-toggle='modal' data-target='#info-modal'>?</button>";
-					userMonsterHP = response.hit_points;
-					userMonsterAC = response.armor_class;
-					userMonsterURL = results;
-					userMonsterName = response.name + userMonsterButton;
-					userMonsterDex = response.dexterity;
-					rollInitiative(userMonsterDex);
+					const userMonsterHP = response.hit_points;
+					const userMonsterAC = response.armor_class;
+					const userMonsterURL = results;
+					const userMonsterName = response.name + userMonsterButton;
+					const userMonsterDex = response.dexterity;
+					const monsterInitiative = rollInitiative(userMonsterDex);
 					let i;
 					for (i=0; i<quantity; i++){
 						database.ref().child("Characters").push({
@@ -267,29 +253,25 @@ $(document).ready(function(){
 	});
 
 	// If ajax call comes back empty
-	function noSuchMonster(){
-		var audio = document.createElement("audio");
+	const noSuchMonster = () => {
+		const audio = document.createElement("audio");
 		audio.setAttribute("src", "assets/sounds/error.flac");
 		audio.play();
 		$("#not-on-file").html("<p class='transparent p-2 animated fadeInDownBig'>Please Check Your Spelling, Otherwise This Monster Is Not In The SRD");
-	}
+	};
 
 	//If ajax call comes back valid
-	function isSuchMonster(){
-		$("#not-on-file").html("");
-	}
+	const isSuchMonster = () => $("#not-on-file").html("");
 
 	// Generate Initiative For Monsters
-	function rollInitiative(x){
-		// Roll a d20 for initiative
+	const rollInitiative = (x) => {
 		let initiativeRoll = Math.floor(Math.random()*20)+1;
-		// add monsters dex bonus
 		if (x === 1){initiativeRoll-=5}
 		else if (x > 2 && x < 4){initiativeRoll-=4}
 		else if (x > 3 && x < 6){initiativeRoll-=3}
 		else if (x > 5 && x < 8){initiativeRoll-=2}
 		else if (x > 7 && x < 10){initiativeRoll-=1}
-		else if (x > 9 && x < 12){initiativeRoll===0}
+		else if (x > 9 && x < 12){initiativeRoll+=0}
 		else if (x > 11 && x < 14){initiativeRoll+=1}
 		else if (x > 13 && x < 16){initiativeRoll+=2}
 		else if (x > 15 && x < 18){initiativeRoll+=3}
@@ -300,8 +282,8 @@ $(document).ready(function(){
 		else if (x > 25 && x < 28){initiativeRoll+=8}
 		else if (x > 27 && x < 30){initiativeRoll+=9}
 		else if (x === 30){initiativeRoll+=10}
-		monsterInitiative = initiativeRoll;
-	}
+		return initiativeRoll;
+	};
 
 	// Roll Dice
 	$("#roll-dice").on("click", function(event) {
@@ -325,6 +307,5 @@ $(document).ready(function(){
 			)
 		});
 	});
-
 
 });
