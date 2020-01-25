@@ -3,6 +3,31 @@ import React, { useState } from "react";
 const Context = React.createContext({});
 
 const Provider = ({ children }) => {
+  //////////FIREBASE LOGIN/SIGNIN STATE BEGINS HERE//////////
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isNewUser, setIsNewUser] = useState(true);
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+
+  const handleUserNameChange = event => setUserName(event.target.value);
+  const handleUserEmailChange = event => setUserEmail(event.target.value);
+  const handleUserPasswordChange = event => setUserPassword(event.target.value);
+  const handleConfirmPasswordChange = event =>
+    setConfirmPassword(event.target.value);
+
+  const submitNewUser = event => {
+    event.preventDefault();
+    console.log(userName);
+  };
+
+  console.log(setIsLoggedIn, setIsNewUser, setError);
+
+  //////////FIREBASE LOGIN/SIGNIN STATE ENDS HERE//////////
+
   //////////STATE FOR DICE TRAY BEGINS HERE//////////
 
   const [diceModifier, setDiceModifier] = useState(0);
@@ -64,18 +89,7 @@ const Provider = ({ children }) => {
 
   const submitPlayer = event => {
     event.preventDefault();
-    console.log(
-      "name: " +
-        playerName +
-        " ; Initiative: " +
-        playerInit +
-        " ; AC: " +
-        playerAC +
-        " ; Max HP: " +
-        playerMaxHP +
-        " ; Current HP: " +
-        playerCurrentHP
-    );
+    console.log(playerName);
   };
 
   //////////STATE FOR ADD PC ENDS HERE//////////
@@ -83,6 +97,19 @@ const Provider = ({ children }) => {
   return (
     <Context.Provider
       value={{
+        // FIREBASE STATE
+        isLoggedIn,
+        isNewUser,
+        userName,
+        userEmail,
+        userPassword,
+        confirmPassword,
+        error,
+        handleUserNameChange,
+        handleUserEmailChange,
+        handleUserPasswordChange,
+        handleConfirmPasswordChange,
+        submitNewUser,
         // DICE ROLLER STATE
         diceModifier,
         diceResults,
