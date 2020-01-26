@@ -16,6 +16,7 @@ firebase.initializeApp(firebaseConfig);
 // Set global variables
 const database = firebase.database();
 let base;
+let isLoggedIn = false;
 
 $(document).ready(function(){
 
