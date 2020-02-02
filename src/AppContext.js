@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const Context = React.createContext({});
 
 const Provider = ({ children }) => {
+
   //////////FIREBASE LOGIN/SIGNIN STATE BEGINS HERE//////////
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,8 +17,13 @@ const Provider = ({ children }) => {
   const handleUserNameChange = event => setUserName(event.target.value);
   const handleUserEmailChange = event => setUserEmail(event.target.value);
   const handleUserPasswordChange = event => setUserPassword(event.target.value);
-  const handleConfirmPasswordChange = event =>
-    setConfirmPassword(event.target.value);
+  const handleConfirmPasswordChange = event => setConfirmPassword(event.target.value);
+
+  const changeLoginStatus = () => {
+    const checkStatus = isNewUser;
+    setIsNewUser(!checkStatus);
+    console.log(checkStatus, !checkStatus);
+  }
 
   const submitNewUser = event => {
     event.preventDefault();
@@ -61,15 +67,13 @@ const Provider = ({ children }) => {
   const [monsterQuantity, setMonsterQuantity] = useState(1);
 
   const handleMonsterNameChange = event => setMonsterName(event.target.value);
-  const handleMonsterQuantityChange = event =>
-    setMonsterQuantity(event.target.value);
+  const handleMonsterQuantityChange = event => setMonsterQuantity(event.target.value);
 
   const submitMonster = event => {
     event.preventDefault();
-    console.log(
-      "You are requesting " + monsterName + " (" + monsterQuantity + "x)"
-    );
+    console.log("You are requesting " + monsterName + " (" + monsterQuantity + "x)");
   };
+
   //////////STATE FOR ADD NPC ENDS HERE//////////
 
   //////////STATE FOR ADD PC STARTS HERE//////////
@@ -84,8 +88,7 @@ const Provider = ({ children }) => {
   const handlePlayerInitChange = event => setPlayerInit(event.target.value);
   const handlePlayerAcChange = event => setPlayerAC(event.target.value);
   const handlePlayerMaxHpChange = event => setPlayerMaxHP(event.target.value);
-  const handlePlayerCurrentHpChange = event =>
-    setPlayerCurrentHP(event.target.value);
+  const handlePlayerCurrentHpChange = event => setPlayerCurrentHP(event.target.value);
 
   const submitPlayer = event => {
     event.preventDefault();
@@ -109,6 +112,7 @@ const Provider = ({ children }) => {
         handleUserEmailChange,
         handleUserPasswordChange,
         handleConfirmPasswordChange,
+        changeLoginStatus,
         submitNewUser,
         // DICE ROLLER STATE
         diceModifier,

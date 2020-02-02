@@ -2,6 +2,7 @@ $black: #222222;
 $blacker: #000000;
 $white: #ffffff;
 $yellow: #fcd251;
+$background: #222222aa;
 
 body {
   font-family: "Germania One", cursive;
@@ -25,8 +26,20 @@ body {
   text-shadow: -3px -2px 5px opacify($yellow, 0.8);
 }
 
-.accordion .card {
+.sign-up-form {
+  color: #ffffff;
   background-color: #222222aa;
+  margin: 40px;
+}
+
+.sign-up-button {
+  width: fit-content;
+  margin: 20px auto;
+  display: block;
+}
+
+.accordion .card {
+  background-color: $background;
   color: $white;
   padding: 15px;
 }
@@ -43,5 +56,5 @@ body {
 #combat-table {
   font-size: 20px;
   color: $white;
-  background: #222222aa;
+  background: $background;
 }
