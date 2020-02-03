@@ -30,6 +30,11 @@ const Provider = ({ children }) => {
     console.log(userName);
   };
 
+  const submitUserLogin = event => {
+    event.preventDefault();
+    console.log(userEmail);
+  }
+
   console.log(setIsLoggedIn, setIsNewUser, setError);
 
   //////////FIREBASE LOGIN/SIGNIN STATE ENDS HERE//////////
@@ -114,6 +119,7 @@ const Provider = ({ children }) => {
         handleConfirmPasswordChange,
         changeLoginStatus,
         submitNewUser,
+        submitUserLogin,
         // DICE ROLLER STATE
         diceModifier,
         diceResults,

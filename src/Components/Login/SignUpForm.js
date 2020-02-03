@@ -40,7 +40,7 @@ const SignUpForm = () => {
             <Form.Group controlId="formAddUserEmail">
               <Form.Label>Email Address</Form.Label>
               <Form.Control
-                type="text"
+                type="email"
                 defaultValue={userEmail}
                 onChange={handleUserEmailChange}
               />
@@ -48,7 +48,7 @@ const SignUpForm = () => {
             <Form.Group controlId="formAddUserPassword">
               <Form.Label>Choose a Password</Form.Label>
               <Form.Control
-                type="text"
+                type="password"
                 defaultValue={userPassword}
                 onChange={handleUserPasswordChange}
               />
@@ -56,7 +56,7 @@ const SignUpForm = () => {
             <Form.Group controlId="formAddConfirmPassword">
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
-                type="text"
+                type="password"
                 defaultValue={confirmPassword}
                 onChange={handleConfirmPasswordChange}
               />
@@ -65,7 +65,7 @@ const SignUpForm = () => {
               variant="warning" 
               type="submit" 
               className="sign-up-button"
-              oncClick={submitNewUser}
+              onClick={submitNewUser}
             >Submit</Button>
             {error && <p>{error.message}</p>}
           </Form>

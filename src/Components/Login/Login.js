@@ -5,7 +5,11 @@ import SignUpPage from "./SignUpPage";
 
 const Login = () => {
   const { isNewUser } = useContext(Context);
-  return <div>{!isNewUser ? <LoginPage /> : <SignUpPage />}</div>;
+  return (
+    <div>
+      {!isNewUser ? <LoginPage /> : <SignUpPage />}
+    </div>
+  );
 };
 
 export default Login;
