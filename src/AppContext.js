@@ -18,27 +18,25 @@ const Provider = ({ children }) => {
     measurementId: process.env.REACT_APP_MEASUREMENT_ID
   };
 
-  // const Firebase = () => {
-    if (!firebase.apps.length) {
-      firebase.initializeApp(config);
+  if (!firebase.apps.length) {
+    firebase.initializeApp(config);
   }
-    // firebase.initializeApp(config);
-    const [auth, setAuth] = useState(firebase.auth());
-    const [db, setDb] = useState(firebase.database());
+  const [auth] = useState(firebase.auth());
+  const [db] = useState(firebase.database());
 
-    //////////AUTH API//////////
+  //////////AUTH API//////////
 
-    const doCreateUserWithEmailAndPassword = (email, password) => auth.createUserWithEmailAndPassword(email, password);
-    const doSignInWithEmailAndPassword = (email, password) => auth.signInWithEmailAndPassword(email, password);
-    const doSignOut = () => auth.signOut();
-    const doPasswordReset = email => auth.sendPasswordResetEmail(email);
-    const doPasswordUpdate = password => auth.currentUser.updatePassword(password);
+  const doCreateUserWithEmailAndPassword = (email, password) => auth.createUserWithEmailAndPassword(email, password);
+  const doSignInWithEmailAndPassword = (email, password) => auth.signInWithEmailAndPassword(email, password);
+  const doSignOut = () => auth.signOut();
+  const doPasswordReset = email => auth.sendPasswordResetEmail(email);
+  const doPasswordUpdate = password => auth.currentUser.updatePassword(password);
 
-    //////////USER API//////////
-    const user = (uid) => db.ref(`users/${uid}`);
-    const users = () => db.ref("users");
+  //////////USER API//////////
+  const user = (uid) => db.ref(`users/${uid}`);
+  const users = () => db.ref("users");
 
-  //////////FIREBASE LOGIN/SIGNIN STATE BEGINS HERE//////////
+  //////////FIREBASE LOGIN/SIGNIN STATE//////////
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isNewUser, setIsNewUser] = useState(true);
@@ -46,7 +44,7 @@ const Provider = ({ children }) => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [uid, setUid] = useState("");
 
   const handleUserNameChange = event => setUserName(event.target.value);
   const handleUserEmailChange = event => setUserEmail(event.target.value);
@@ -56,29 +54,31 @@ const Provider = ({ children }) => {
   const changeLoginStatus = () => {
     const checkStatus = isNewUser;
     setIsNewUser(!checkStatus);
+    console.log("Is New User = " + isNewUser);
+  }
+
+  const updateLoginStatus = () => {
+    const loginStatus = isLoggedIn;
+    setIsLoggedIn(!loginStatus);
+    console.log("Is Logged In = " + isLoggedIn);
   }
 
   const submitNewUser = event => {
     event.preventDefault();
-    console.log("let's give this a try")
     doCreateUserWithEmailAndPassword(userEmail, userPassword)
     .then(authUser => {
-      // Create a user in your Firebase realtime database
-      user(authUser.user.uid)
-      console.log(authUser.user.uid)
-      .set({ userName, userEmail })
-      .then(() => {
-        setUserName("")
-        setUserEmail("")
-        setUserPassword("")
-        setConfirmPassword("")
-      })
-      .catch(error => {
-        setError({ error });
-      });
+      user(authUser.user.uid);
+      setUid(authUser.user.uid);
+      updateLoginStatus();
+      // .set({ userName, userEmail })
+      // .then(() => {
+      // setUserEmail("")
+      // setUserPassword("")
+      // setConfirmPassword("")
     })
-    .catch(error => {
-      setError({ error });
+    .catch((error) => {
+      console.log(error);
+      alert(error.message);
     });
   };
 
@@ -87,11 +87,7 @@ const Provider = ({ children }) => {
     console.log(userEmail);
   }
 
-  console.log(typeof setIsLoggedIn);
-
-  //////////FIREBASE LOGIN/SIGNIN STATE ENDS HERE//////////
-
-  //////////STATE FOR DICE TRAY BEGINS HERE//////////
+  //////////STATE FOR DICE TRAY//////////
 
   const [diceModifier, setDiceModifier] = useState(0);
   const [diceResults, setDiceResults] = useState("");
@@ -116,9 +112,7 @@ const Provider = ({ children }) => {
     setDiceResults(`( ${diceString} ) + ${diceModifier} = ${total}`);
   };
 
-  //////////STATE FOR DICE TRAY ENDS HERE//////////
-
-  //////////STATE FOR ADD NPC STARTS HERE//////////
+  //////////STATE FOR ADD NPC//////////
 
   const [monsterName, setMonsterName] = useState("");
   const [monsterQuantity, setMonsterQuantity] = useState(1);
@@ -131,9 +125,7 @@ const Provider = ({ children }) => {
     console.log("You are requesting " + monsterName + " (" + monsterQuantity + "x)");
   };
 
-  //////////STATE FOR ADD NPC ENDS HERE//////////
-
-  //////////STATE FOR ADD PC STARTS HERE//////////
+  //////////STATE FOR ADD PC//////////
 
   const [playerName, setPlayerName] = useState("");
   const [playerInit, setPlayerInit] = useState("");
@@ -152,8 +144,6 @@ const Provider = ({ children }) => {
     console.log(playerName);
   };
 
-  //////////STATE FOR ADD PC ENDS HERE//////////
-
   return (
     <Context.Provider
       value={{
@@ -169,12 +159,12 @@ const Provider = ({ children }) => {
         userEmail,
         userPassword,
         confirmPassword,
-        error,
         handleUserNameChange,
         handleUserEmailChange,
         handleUserPasswordChange,
         handleConfirmPasswordChange,
         changeLoginStatus,
+        updateLoginStatus,
         submitNewUser,
         submitUserLogin,
         // DICE ROLLER STATE
