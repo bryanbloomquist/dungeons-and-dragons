@@ -1,8 +1,42 @@
 import React, { useState } from "react";
-
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+// import Firebase from "./Components/Firebase/";
 const Context = React.createContext({});
 
 const Provider = ({ children }) => {
+
+  const config = {
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
+  };
+
+  // const Firebase = () => {
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+  }
+    // firebase.initializeApp(config);
+    const [auth, setAuth] = useState(firebase.auth());
+    const [db, setDb] = useState(firebase.database());
+
+    //////////AUTH API//////////
+
+    const doCreateUserWithEmailAndPassword = (email, password) => auth.createUserWithEmailAndPassword(email, password);
+    const doSignInWithEmailAndPassword = (email, password) => auth.signInWithEmailAndPassword(email, password);
+    const doSignOut = () => auth.signOut();
+    const doPasswordReset = email => auth.sendPasswordResetEmail(email);
+    const doPasswordUpdate = password => auth.currentUser.updatePassword(password);
+
+    //////////USER API//////////
+    const user = (uid) => db.ref(`users/${uid}`);
+    const users = () => db.ref("users");
 
   //////////FIREBASE LOGIN/SIGNIN STATE BEGINS HERE//////////
 
@@ -22,12 +56,30 @@ const Provider = ({ children }) => {
   const changeLoginStatus = () => {
     const checkStatus = isNewUser;
     setIsNewUser(!checkStatus);
-    console.log(checkStatus, !checkStatus);
   }
 
   const submitNewUser = event => {
     event.preventDefault();
-    console.log(userName);
+    console.log("let's give this a try")
+    doCreateUserWithEmailAndPassword(userEmail, userPassword)
+    .then(authUser => {
+      // Create a user in your Firebase realtime database
+      user(authUser.user.uid)
+      console.log(authUser.user.uid)
+      .set({ userName, userEmail })
+      .then(() => {
+        setUserName("")
+        setUserEmail("")
+        setUserPassword("")
+        setConfirmPassword("")
+      })
+      .catch(error => {
+        setError({ error });
+      });
+    })
+    .catch(error => {
+      setError({ error });
+    });
   };
 
   const submitUserLogin = event => {
@@ -35,7 +87,7 @@ const Provider = ({ children }) => {
     console.log(userEmail);
   }
 
-  console.log(setIsLoggedIn, setIsNewUser, setError);
+  console.log(typeof setIsLoggedIn);
 
   //////////FIREBASE LOGIN/SIGNIN STATE ENDS HERE//////////
 
@@ -105,6 +157,11 @@ const Provider = ({ children }) => {
   return (
     <Context.Provider
       value={{
+        doCreateUserWithEmailAndPassword,
+        doSignInWithEmailAndPassword,
+        doSignOut,
+        doPasswordReset,
+        doPasswordUpdate,
         // FIREBASE STATE
         isLoggedIn,
         isNewUser,

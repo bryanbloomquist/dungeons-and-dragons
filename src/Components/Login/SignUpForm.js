@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Context } from "../../AppContext";
 
+
 const SignUpForm = () => {
   const {
     userName,
@@ -16,6 +17,12 @@ const SignUpForm = () => {
     changeLoginStatus,
     submitNewUser
   } = useContext(Context);
+
+  const isInvalid =
+    userName === '' ||
+    userEmail === '' ||
+    userPassword === '' ||
+    userPassword !== confirmPassword;
 
   return (
     <Container>
@@ -62,6 +69,7 @@ const SignUpForm = () => {
               />
             </Form.Group>
             <Button 
+              disabled={isInvalid}
               variant="warning" 
               type="submit" 
               className="sign-up-button"

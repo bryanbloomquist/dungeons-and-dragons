@@ -36,6 +36,17 @@ body {
   width: fit-content;
   margin: 20px auto;
   display: block;
+  transition: all 0.4s;
+}
+
+.sign-up-button:hover {
+  color: $white;
+  box-shadow: 
+    3px 3px 10px opacify($yellow, 0.8),
+    -3px 3px 10px opacify($yellow, 0.8),
+    3px -3px 10px opacify($yellow, 0.8),
+    -3px -3px 10px opacify($yellow, 0.8);
+  transition: all 0.4s;
 }
 
 .accordion .card {
