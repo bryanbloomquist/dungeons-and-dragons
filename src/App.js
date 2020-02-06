@@ -7,10 +7,12 @@ import MainBody from "./Components/MainBody/MainBody";
 
 function App() {
   const { isLoggedIn } = useContext(Context);
+  console.log(isLoggedIn);
   return (
     <Provider>
       <Header />
       {!isLoggedIn ? <Login /> : <MainBody />}
+      {/* {!isLoggedIn ? <MainBody /> : <Login />} */}
     </Provider>
   );
 }
