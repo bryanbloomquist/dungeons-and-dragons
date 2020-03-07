@@ -100,3 +100,7 @@ pre {
 .key { 
     color: #f0f; 
 }
+
+pre {
+    white-space: pre-wrap;
+}

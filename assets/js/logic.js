@@ -309,4 +309,16 @@ $(document).ready(function(){
 		});
 	});
 
+	const fireUpHeroku = () => {
+		const queryURL = "https://frozen-ridge-34491.herokuapp.com/api/monsters/1";
+		$.ajax({
+			url: queryURL,
+			method: "GET",
+		}).then(function(response){
+			console.log("Heroku has awoken.")
+		})
+	};
+
+	fireUpHeroku();
+
 });
